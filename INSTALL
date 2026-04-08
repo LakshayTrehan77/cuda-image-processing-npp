@@ -1,0 +1,56 @@
+# Installation
+
+## Prerequisites
+
+### CUDA Toolkit (11.x or later)
+Download from https://developer.nvidia.com/cuda-downloads
+Follows the installer for your Linux distribution.
+
+Verify installation:
+  nvcc --version
+  nvidia-smi
+
+### CUDA Samples (for helper headers)
+  git clone https://github.com/NVIDIA/cuda-samples.git /usr/local/cuda/samples
+
+Or set SAMPLE_DIR in the Makefile to point to your local clone.
+
+### Python 3 + Pillow (test data generation only)
+  pip3 install Pillow
+
+---
+
+## Build
+
+  cd <project-root>
+  make
+
+If CUDA or samples are in non-standard locations:
+  make CUDA_PATH=/path/to/cuda SAMPLE_DIR=/path/to/cuda-samples
+
+---
+
+## Generate Test Images
+
+  make data
+
+Creates 120 synthetic 512x512 .pgm images in data/input/.
+
+---
+
+## Run
+
+  ./run.sh            # blur+sobel on all images in data/input
+  ./run.sh blur       # Gaussian blur only
+  ./run.sh sobel      # Sobel edge detection only
+
+Or directly:
+  ./bin/batchImageProc --input=data/input --output=data/output --filter=all
+
+---
+
+## Troubleshooting
+
+- "cannot find -lnppc"  : ensure CUDA 11+ is installed and lib64 is in LD_LIBRARY_PATH
+- "helper_cuda.h not found" : set SAMPLE_DIR to your cuda-samples clone path
+- Pillow missing        : pip3 install Pillow
