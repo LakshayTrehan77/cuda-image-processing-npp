@@ -5,12 +5,7 @@ SAMPLE_DIR  ?= /usr/local/cuda/samples
 
 INCLUDES     = -I. \
                -I$(CUDA_PATH)/include \
-               -I$(SAMPLE_DIR)/common/inc\
-			   -I/home/coder/project/Common/UtilNPP\
-			   -I/home/coder/project/Common\
-			   -I/home/coder/project/Common/data\
-			   -I/home/coder/project/Common/GL\
-			   -I/home/coder/project/Common/lib/x64\
+               -I$(SAMPLE_DIR)/common/inc
 
 CXXFLAGS     = -std=c++14 -O2
 NVCCFLAGS    = $(CXXFLAGS) $(INCLUDES)
@@ -19,7 +14,7 @@ LDFLAGS      = -L$(CUDA_PATH)/lib64 \
                -lcudart \
                -lnppc -lnppial -lnppicc -lnppidei \
                -lnppif -lnppig -lnppim -lnppist \
-               -lnppisu -lnppitc\
+               -lnppisu -lnppitc \
 			   -lfreeimage
 
 SRC_DIR      = src
